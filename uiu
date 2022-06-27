@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# Author: Mr. Garbage
+# This program will check uiu notice board
+# usage: 
+# 1) uiu notice
+# 2) uiu scholarship <trimester> <year>
+# version: 1.0
+
+# notice program
+if [[ "$1" == "" ]]
+then
+    echo "
+       ------------------------------------------------------------------
+       *                                                                *
+       *                United International University                 *
+       *                                                                *
+       *                 Usage:                                         *
+       *               * uiu notice                                     *
+       *               * uiu scholarship <trimester> <year>             *
+       *                                                                *
+       ------------------------------------------------------------------
+        "
+    exit;
+fi;
+
+if [[ "$1" == "notice" || "$1" == "-n" ]]
+then
+    curl -s https://www.uiu.ac.bd/notices/ > /tmp/notice.txt;
+    notice=$(cat /tmp/notice.txt |grep bookmark |cut -d ">" -f3 |cut -d "<" -f1);
+    echo "
+
+                        ***  UIU NOTICE HEADINGS  ***
+                        
+
+$notice
+
+    "
+    exit;
+fi
+
+
+# scholarship program
+trimester=$2;
+year=$3;
+
+if [[ "$2" == "" || "$3" == "" ]]
+then
+    echo "
+       ------------------------------------------------------------------
+       *                                                                *
+       *            Check UIU scholarship result avaiability            *
+       *                                                                *
+       *                Example:                                        *
+       *              * uiu scholarship summer 2022                     *
+       *                                                                *
+       ------------------------------------------------------------------
+        "
+    exit;
+fi;
+
+
+response=$(curl -s -I https://www.uiu.ac.bd/notices/scholarship-award-list-$trimester-$year/ |grep "HTTP" |cut -d " " -f2); # HTTP response code
+if [[ "$response" == "404" ]] # 404 means not found
+then
+	echo "
+	Sorry! UIU Scholarship result for $trimester-$year trimester is not avaiabile.
+	"
+elif [[ "$response" == "200" ]] # 200 means OK
+then
+	echo "
+	Yay! UIU Scholarship result for $trimester-$year trimester is avaiabile.
+	Link: https://www.uiu.ac.bd/notices/scholarship-award-list-$trimester-$year
+	"
+    else
+    echo "
+    Something went wrong! Please check your internet connection.
+    "
+fi
+
+
+exit
+

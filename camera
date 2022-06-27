@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Author : Mr. Garbage
+# This Program is to defend Yourself from hackers
+# This Progran will turn down your webcam from the kernel module
+
+# commands:
+# camera down or camera stop
+# camera up or camera start
+
+if [[ "$1" == "up" || "$1" == "start" ]]
+then
+	sudo modprobe -a uvcvideo && echo "Webcam is Up"
+elif [[ "$1" == "down" || "$1" == "stop" ]]
+then
+	sudo modprobe -r uvcvideo && echo "Webcam is Down"
+else
+    echo "
+       ------------------------------------------------------------------
+       *			                                        *
+       *		         Usage:                                 *
+       *		       * camera up   / camera start             *
+       *		       * camera down / camera stop              *
+       *                                                                *
+       ------------------------------------------------------------------
+	"
+fi;
+
+exit
