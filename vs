@@ -6,6 +6,7 @@ then
 	#rm -f 1
 else
 echo "#include <stdio.h>
+/*  */
 
 int main() {
 
