@@ -1,0 +1,50 @@
+#!/bin/bash
+
+if [[ "$1" == "-c" ]]
+then
+
+
+
+if [[ -f "$2.c" ]];
+then
+	codium $2.c
+else
+echo "#include <stdio.h>
+
+int main() {
+	
+	
+	
+	return 0;
+} " > $2.c;
+codium $2.c
+fi;
+
+
+
+elif [[ "$1" == "-j" ]]
+then
+
+
+
+
+if [[ -f "$2.java" ]]; 	# $2.java file exists 
+then
+    codium $2.java
+else
+echo "public class $2 {
+
+	public static void main(String args[]) {
+         
+	}	
+} " > $2.java;
+codium $2.java
+fi;
+
+
+
+
+
+fi;
+
+exit

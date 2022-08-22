@@ -1,0 +1,31 @@
+#!/bin/bash
+# Author: Mr. Garbage
+# Version: 2.0
+
+if [[ -f "$1.c" && -f "$1.java" ]]
+then
+    echo "There are more than 1 source code as $1"
+    read -p "Which one to run ? Please enter name with extension : " ANS
+    if [[ "$ANS" == "$1.c" ]]
+    then
+        gcc $1.c -o $1 -lm && xterm -e '/usr/bin/cb_console_runner1' './'$1'' #> /dev/null 2>1&
+        rm -f 1;
+    elif [[ "$ANS" == "$1.java" ]]
+    then
+        javac $1.java && xterm -e '/usr/bin/cb_console_runner1' ''java $1''
+    fi;
+
+
+elif [[ -f "$1.c" ]]
+then
+    gcc $1.c -o $1 -lm && xterm -e '/usr/bin/cb_console_runner1' './'$1'' #> /dev/null 2>1&
+    rm -f 1;
+
+elif [[ -f "$1.java" ]]
+then
+    javac $1.java && xterm -e '/usr/bin/cb_console_runner1' ''java $1''
+
+fi
+
+
+exit
