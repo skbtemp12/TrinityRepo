@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Run Program installer
+# Author: Mr. Garbage
+# Version: 1.0
+
+
+sudo apt update && sudo apt install xterm -y;
+wget https://raw.githubusercontent.com/skbtemp12/TrinityRepo/main/console_runner;
+chmod +x console_runner;
+sudo mv console_runner /usr/bin;
+
+
+echo "xterm*faceSize: 12
+xterm*geometry: 90x30" > ~/.Xresources; # creating config file for xterm
+
+xrdb -merge ~/.Xresources; # merging x-window manager with our xterm configurations
+echo "
+		***	Done	***
+"
+
+exit;
