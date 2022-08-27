@@ -11,7 +11,8 @@ chmod +x console_runner;
 sudo mv console_runner /usr/bin;
 
 
-echo "xterm*faceSize: 12
+echo "xterm*faceName: Luxi Mono
+xterm*faceSize: 12
 xterm*geometry: 90x30" > ~/.Xresources; # creating config file for xterm
 
 xrdb -merge ~/.Xresources; # merging x-window manager with our xterm configurations
