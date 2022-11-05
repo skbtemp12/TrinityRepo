@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Author: Mr. Garbage
+# version: 2.0
+
+uploadMesg() {
+    echo "
+
+            Uploading '$FILE' ...
+
+    "
+}
+
+successMesg() {
+    echo "
+
+            Link: $LINK
+
+    "
+}
+
+failedMesg() {
+    echo "
+            Something went wrong. Check your internet connection.
+    "
+}
+
+checkValidity() {
+    if [[ "$Status" == "0" ]]
+    then
+        successMesg;
+    else
+        failedMesg;
+    fi
+}
+
+
+FILE=$1;
+uploadMesg;
+LINK=$(curl -s -F 'file=@'$FILE'' http://0x0.st);
+Status=$?;
+clear;
+checkValidity;
+
+
+exit
